@@ -1,0 +1,21 @@
+
+
+body {
+    margin: 20px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+}
+
+.dataTable {
+    display: inline-block;
+}
+
+th, td {
+    border: 1px solid;
+    padding: 5px;
+}
