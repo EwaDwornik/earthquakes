@@ -4,30 +4,37 @@ import {Earthquake} from "../model";
 
 function AllCharts() {
     const [list, setLists] = useState<Earthquake[]>([]);
+    let [selectTime, setSelectTime] = useState<number>();
 
-    const refreshingOptions = [
+    function handleChange(event: any) {
+        setSelectTime(event.target.value)
+    }
+
+
+    useEffect(() => {
+        let interval = setInterval(async () => {
+            const url = "https://apis.is/earthquake/is ";
+            const response = await fetch(url);
+            const data = await response.json();
+            setLists(data.results);
+            if (!selectTime) {
+                setSelectTime(900000);
+            }
+            console.log(selectTime)
+        }, selectTime)
+        return () => {
+            clearInterval(interval);
+        }
+    }, [selectTime]);
+
+    const timeOptions = [
+        {value: 1000, label: '1 second'},
+        {value: 2000, label: '2 seconds'},
         {value: 60000, label: '1 minute'},
+        {value: 120000, label: '2 minutes'},
         {value: 300000, label: '5 minutes'},
         {value: 900000, label: '15 minutes'},
-        {value: 3600000, label: '1 hour'},
     ]
-
-    useEffect(
-        () => {
-        const fetchData = async () => {
-
-            const response = await fetch(
-                "https://apis.is/earthquake/is "
-            );
-            const data = await response.json();
-            list.sort((a, b) => (b.timestamp < a.timestamp) ? 1 : -1)
-            setLists(data.results);
-
-        };
-
-        fetchData();
-    }, []);
-
 
     const formatDate = (dateString: string) => {
         const options: any = {
@@ -41,19 +48,18 @@ function AllCharts() {
         return new Date(dateString).toLocaleDateString(undefined, options)
     }
 
+
     return (
         <div className="content">
             <div className="selectTime">
                 <select
-                    className="form-select searching-child"
-                    onChange={(e: any) => (e.target.value)}>
-                    <option selected>Refresh pager every:</option>
-                    <option value="1">1 minute</option>
-                    <option value="2">2 minutes</option>
-                    <option value="5">5 minutes</option>
-                    <option value="10">10 minutes</option>
-
-                </select></div>
+                    value={selectTime}
+                    onChange={handleChange}>
+                    {timeOptions.map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                    ))}
+                </select>
+            </div>
             <div className="dataTable">
                 <table className="table table-striped-columns text-center">
                     <tbody>
