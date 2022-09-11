@@ -8,8 +8,8 @@ export function Map() {
     const {earthquakes} = useContext(Context)
 
     const containerStyle = {
-        width: '600px',
-        height: '400px'
+        width: '400px',
+        height: '270px'
     };
 
     const center = {
@@ -23,18 +23,16 @@ export function Map() {
         geoLocations.push({lat: eartquake.latitude, lng: eartquake.longitude, size: eartquake.size})
     })
 
-
-
     return (
         <div className="visuals">
 
             <LoadScript
-                googleMapsApiKey="AIzaSyDGFlWnT7V8PIvcGAvCtgkIWWIrzLpUpgg"
+                googleMapsApiKey=""
             >
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={6}
+                    zoom={5.5}
                 >
                     <>{
                         geoLocations.map((earthquake: any, id) => {
@@ -55,4 +53,5 @@ export function Map() {
 }
 
 export default Map;
+
 

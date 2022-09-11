@@ -11,27 +11,33 @@ function Navigation() {
         setSelectTime?.(event.target.value);
     }
 
-    // const handleChange: ChangeEventHandler<HTMLSelectElement> = (e): void => {
-    //   const value = e.target.value
-    //  setSelectTime?.(+value);
-    //}
-
     return (
-        <nav className="navbar fixed-top navbar-expand-md navbar-light bg-light navbar-custom">
-            <a className="navbar-brand" href="/">Earthquakes</a>
-            <a className="navbar-brand" href="/visuals">Visuals</a>
-            <div className="selectTime">
-                Data will refresh in every
-                <select
-                    value={selectTime}
-                    onChange={handleChange}>
-                    {timeOptions.map((option) => (
-                        <option value={option.value}>{option.label}</option>
-                    ))}
-                </select>
+        <nav className="navbar fixed-top navbar-expand-lg bg-light">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">Earthquakes</a>
+                <div className="navbar-collapse" >
+                    <ul className="navbar-nav me-auto">
+                        <li className="nav-item">
+                            <a className="nav-link active" href="/visuals">Visuals</a>
+                        </li>
+                    </ul>
+                    <div className="d-flex" role="search">
+                        <div className="m-2">
+                            Data will refresh in every
+                        </div>
+                        <select
+                            className="m-2"
+                            value={selectTime}
+                            onChange={handleChange}>
+                            {timeOptions.map((option) => (
+                                <option value={option.value}>{option.label}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
             </div>
         </nav>
-    );
+);
 }
 
 export default Navigation;

@@ -8,8 +8,8 @@ function Visuals() {
 
     return (
         <div className="visuals">
-            <Charts/>
             <Map/>
+            <Charts/>
         </div>
     );
 }
