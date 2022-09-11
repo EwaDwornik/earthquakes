@@ -1,37 +1,50 @@
-import React, { useState, useEffect } from "react";
-import {Earthquake} from "../model";
+import React, {useContext} from 'react';
+import '../style/style.css';
+import {Context} from "../context/context";
+import {formatDate} from "../services/utilities";
 
 
-export const Home = () => {
-    const [list, setLists] = useState<Earthquake[]>([]);
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(
-                "https://apis.is/earthquake/is "
-            );
-            const data = await response.json();
-            setLists(data.results);
-        };
-
-        fetchData();
-    }, []);
-
-    labels: {
-
-
-    }
-
+export function Earthquakes() {
+    const {earthquakes} = useContext(Context)
 
     return (
-        <ul>
-            {list.map(({ timestamp, humanReadableLocation }) => (
-                <li key={timestamp}>{humanReadableLocation}</li>
-            ))}
-        </ul>
-    );
-};
+        <div className="content">
 
-export default Home;
+            <div className="dataTable">
+                <table className="table table-striped-columns text-center">
+                    <tbody>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>latitude</th>
+                        <th>longitude</th>
+                        <th>depth</th>
+                        <th>size</th>
+                        <th>quality</th>
+                        <th>Location</th>
+                    </tr>
+
+                    {earthquakes.map((single, i: number) =>
+                        <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{formatDate(single.timestamp)}</td>
+                            <td>{single.latitude}</td>
+                            <td>{single.longitude}</td>
+                            <td>{single.depth}</td>
+                            <td>{single.size}</td>
+                            <td>{single.quality}</td>
+                            <td>{single.humanReadableLocation}</td>
+                        </tr>
+                    )}
+
+                    </thead>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+        ;
+}
+export default Earthquakes;
 

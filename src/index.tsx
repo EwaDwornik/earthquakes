@@ -5,18 +5,19 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
-import Earthquakes from "./components/earthquakesDB";
-import Charts from "./components/Chart";
+import App from "./App";
+import Visuals from "./components/Visuals";
 
 ReactDOM.render(
+    <App>
     <Router>
         <Navigation/>
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/earthquakes" element={<Earthquakes/>}/>
-            <Route path="/Charts" element={<Charts/>}/>
+            <Route path="/visuals" element={<Visuals/>}/>
         </Routes>
-    </Router>,
+    </Router>
+    </App>,
 
     document.getElementById("root"),
 );

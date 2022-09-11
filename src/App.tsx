@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Earthquake} from "./model";
+import {Context} from "./context/context";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export function App (props: any) {
+    const [earthquakes, setEarthquakes] = useState<Earthquake[]>([]);
+    const [selectTime, setSelectTime] = useState<number>(0);
+
+    const getData = async () => {
+        const url = "https://apis.is/earthquake/is ";
+        const response = await fetch(url);
+        const data = await response.json();
+        setEarthquakes(data.results)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    useEffect(() => {
+        if (!selectTime) {
+            return;
+        }
+
+        const interval = setInterval(async () => {
+            await getData()
+
+        }, selectTime)
+        return () => {
+            clearInterval(interval);
+        }
+    }, [selectTime]);
+
+    return (
+        <div className="App">
+            <Context.Provider value={{
+                selectTime,
+                earthquakes,
+                setSelectTime
+            }}>
+                {props.children}
+            </Context.Provider>
+
+        </div>
+    );
 }
 
 export default App;
