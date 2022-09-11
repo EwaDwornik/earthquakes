@@ -29,8 +29,8 @@ function Navigation() {
                             className="m-2"
                             value={selectTime}
                             onChange={handleChange}>
-                            {timeOptions.map((option) => (
-                                <option value={option.value}>{option.label}</option>
+                            {timeOptions.map((option, i) => (
+                                <option key={i} value={option.value}>{option.label}</option>
                             ))}
                         </select>
                     </div>
