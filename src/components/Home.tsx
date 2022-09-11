@@ -1,70 +1,78 @@
 import React, {useState, useContext} from 'react';
 import '../style/style.css';
 import {Context} from "../context/context";
-import {formatDate} from "../services/utilities";
+import {centerMap, formatDate, initialMarker, initialRange} from "../services/utilities";
+import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 
-interface Range {
-    min: number,
-    max: number
-}
-
-const initialRange: Range = {
-    min: 0,
-    max: 5
-}
 
 export function Earthquakes() {
-    const {earthquakes} = useContext(Context)
+    const {earthquakes} = useContext(Context);
     const [range, setRange] = useState(initialRange);
+    const [marker, setMarker] = useState(initialMarker);
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setRange(initialRange)
-        console.log(range.min)
-        console.log(range.max)
     }
 
     const results = earthquakes.filter(eq => {
         return eq.size > range.min && eq.size < range.max
     })
 
+    const containerStyle = {
+        width: '350px',
+        height: '200px'
+    };
+
     return (
-        <div>
-            <h3>Live: earthquakes in Iceland </h3>
+        <div className='container mx-auto'>
+            <div className="col-6 col-md-3 sidenav">
+                <LoadScript
+                    googleMapsApiKey=""
+                >
+                    <GoogleMap
+                        mapContainerStyle={containerStyle}
+                        center={centerMap}
+                        zoom={5}
+                    >
+                        <Marker position={marker}/>
+                    </GoogleMap>
+                </LoadScript>
+            </div>
+            <div className="wider-grid">
 
-            <form onSubmit={handleSubmit} className="row content">
-                <div className="col-md-2">
-                    <label>min magnitude:</label>
-                    <input
-                        type='number'
-                        min="0" max="5"
-                        step="0.1"
-                        className="form-control"
-                        required
-                        value={range.min}
-                        onChange={e => {
-                            setRange({...range, min: e.target.valueAsNumber});
-                        }}/>
-                </div>
+                <h3>Live: earthquakes in Iceland </h3>
 
-                <div className="col-md-2">
-                    <label>max magnitude:</label>
-                    <input
-                        type="number"
-                        min="0" max="5"
-                        step="0.1"
-                        className="form-control"
-                        value={range.max}
-                        onChange={e => {
-                            setRange({...range, max: e.target.valueAsNumber});
-                        }}/>
-                </div>
-            </form>
+                <form onSubmit={handleSubmit} className="row content">
+                    <div className="col-md-2">
+                        <label>min magnitude:</label>
+                        <input
+                            type='number'
+                            min="0" max="5"
+                            step="0.1"
+                            className="form-control"
+                            required
+                            value={range.min}
+                            onChange={e => {
+                                setRange({...range, min: e.target.valueAsNumber});
+                            }}/>
+                    </div>
+                    <div className="col-md-2">
+                        <label>max magnitude:</label>
+                        <input
+                            type="number"
+                            min="0" max="5"
+                            step="0.1"
+                            className="form-control"
+                            value={range.max}
+                            onChange={e => {
+                                setRange({...range, max: e.target.valueAsNumber});
+                            }}/>
+                    </div>
+                </form>
 
-            <div className="content">
-
-                <div className="dataTable">
-                    <table className="table table-striped-columns text-center">
+                <div className="dataTable content">
+                    <table className="table table-striped text-center">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -75,6 +83,7 @@ export function Earthquakes() {
                             <th>magnitude</th>
                             <th>quality</th>
                             <th>location</th>
+                            <th>show</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -88,6 +97,12 @@ export function Earthquakes() {
                                 <td>{single.size}</td>
                                 <td>{single.quality}</td>
                                 <td>{single.humanReadableLocation}</td>
+                                <td>
+                                    <button onClick={e => {
+                                        setMarker({...marker, lat: single.latitude, lng: single.longitude})
+                                    }}>show
+                                    </button>
+                                </td>
                             </tr>
                         )}
                         </tbody>
@@ -96,7 +111,6 @@ export function Earthquakes() {
             </div>
         </div>
     )
-        ;
 }
 
 export default Earthquakes;

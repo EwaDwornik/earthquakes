@@ -63,8 +63,8 @@ export function Charts() {
             <div>
 
                 <BarChart
-                    width={500}
-                    height={300}
+                    width={550}
+                    height={330}
                     data={numberOfEarthquakes}
                     margin={{
                         top: 5,

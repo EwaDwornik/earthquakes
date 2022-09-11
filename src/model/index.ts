@@ -8,10 +8,15 @@ export interface Earthquake {
     humanReadableLocation: string,
 }
 
+export interface GeoMarker {
+    lat: number,
+    lng: number
+}
+
 export interface EarthquakesContextType {
     earthquakes: Earthquake[],
     selectTime: number,
-    setSelectTime?:  (value: number) => void,
+    setSelectTime?: (value: number) => void,
 }
 
 export interface Time {
@@ -22,4 +27,9 @@ export interface Time {
 export interface ChartNumberOfEarthquakes {
     name: string,
     events: number,
+}
+
+export interface Range {
+    min: number,
+    max: number
 }

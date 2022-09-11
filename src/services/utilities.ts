@@ -1,4 +1,4 @@
-import {Time} from "../model";
+import {GeoMarker, Range, Time} from "../model";
 
 export const timeOptions: Time[] = [
     {value: 0, label: 'No refreshing'},
@@ -21,3 +21,18 @@ export const formatDate = (dateString: string) => {
     }
     return new Date(dateString).toLocaleDateString(undefined, options)
 }
+
+export const initialRange: Range = {
+    min: 0,
+    max: 5
+}
+
+export const initialMarker: GeoMarker = {
+    lat: 0,
+    lng: 0
+}
+
+export const centerMap = {
+    lat: 65.005,
+    lng: -18.677
+};
