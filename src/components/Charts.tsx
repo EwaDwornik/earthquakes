@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import '../style/style.css';
 import {ChartNumberOfEarthquakes} from "../model";
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts";
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
 import {Context} from "../context/context";
 
 
@@ -61,8 +61,7 @@ export function Charts() {
     return (
         <div className="visuals">
             <div>
-                <p>Number of events bigger or equal </p>
-                <p>Total number from: {earthquakes.length}</p>
+
                 <BarChart
                     width={500}
                     height={300}
@@ -78,10 +77,11 @@ export function Charts() {
                     <XAxis dataKey="name" scale="point" padding={{left: 10, right: 10}}/>
                     <YAxis/>
                     <Tooltip/>
-                    <Legend/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Bar dataKey="events" fill="#8884d8" background={{fill: "#eee"}}/>
                 </BarChart>
+                <p>Events sorted by magnitude</p>
+                <p>Total number of events: {earthquakes.length}</p>
             </div>
 
         </div>
