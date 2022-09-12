@@ -1,4 +1,4 @@
-import {GeoMarker, Range, Time} from "../model";
+import {GeoMarker, Range, SizeDepthQuality, Time} from "../model";
 
 //refreshing time select bar
 export const timeOptions: Time[] = [
@@ -53,3 +53,7 @@ export const containerStyleAllMarkers = {
     width: '500px',
     height: '370px'
 };
+
+
+//data for the depth/quality/magnitude chart
+export const sizeDepthQualityChart: SizeDepthQuality[] = []

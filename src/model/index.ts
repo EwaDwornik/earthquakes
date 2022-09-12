@@ -29,6 +29,12 @@ export interface ChartNumberOfEarthquakes {
     events: number,
 }
 
+export interface SizeDepthQuality {
+    size: number,
+    depth: number,
+    quality: number,
+}
+
 export interface Range {
     min: number,
     max: number

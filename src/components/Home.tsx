@@ -27,6 +27,9 @@ export function Earthquakes() {
         <div className='container'>
             {/* frozen side, made to always show a map, even when a table is long */}
             <div className="col-6 col-md-3 sidenav">
+                <div className="description">
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
                 <LoadScript googleMapsApiKey="">
                     <GoogleMap
                         mapContainerStyle={containerStyleOneMarker}
@@ -48,7 +51,7 @@ export function Earthquakes() {
                                 type='number'
                                 min="0" max="5"
                                 step="0.1"
-                                className="form-control"
+                                className="form-control shake"
                                 required
                                 value={range.min}
                                 onChange={e => {
@@ -61,7 +64,7 @@ export function Earthquakes() {
                                 type="number"
                                 min="0" max="5"
                                 step="0.1"
-                                className="form-control"
+                                className="form-control shake"
                                 value={range.max}
                                 onChange={e => {
                                     setRange({...range, max: e.target.valueAsNumber});
@@ -96,7 +99,7 @@ export function Earthquakes() {
                                     <td>{single.quality}</td>
                                     <td>{single.humanReadableLocation}</td>
                                     <td>
-                                        <button className="btn btn-outline-dark" onClick={e => {
+                                        <button className="btn shake btn-outline-dark" onClick={e => {
                                             setMarker({...marker, lat: single.latitude, lng: single.longitude})
                                         }}>show
                                         </button>

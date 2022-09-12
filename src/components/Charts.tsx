@@ -1,14 +1,24 @@
 import React, {useContext} from 'react';
 import '../style/style.css';
-import {ChartNumberOfEarthquakes} from "../model";
+import {SizeDepthQuality, ChartNumberOfEarthquakes} from "../model";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
+import {
+    ScatterChart,
+    Scatter,
+    ZAxis,
+    Legend,
+} from 'recharts';
 import {Context} from "../context/context";
+
+
+
 
 //all Charts
 export function Charts() {
     const {earthquakes} = useContext(Context)
 
-    //first chart, segregating magnitude value
+    //data for the events/magnitude chart
+        //first chart, segregating magnitude value
     let dataA = 0; //0-0.5
     let dataB = 0; //0.5-1
     let dataC = 0; //1-1.5
@@ -31,8 +41,6 @@ export function Charts() {
             dataF++
         }
     })
-
-    //data in the chart needed format
     const numberOfEarthquakes: ChartNumberOfEarthquakes[] = [
         {
             name: "0-0.5",
@@ -60,32 +68,47 @@ export function Charts() {
         }
     ];
 
+
+    //data for the depth/quality/magnitude, second chart
+    const sizeDepthQualityChart: SizeDepthQuality[] = []
+
+    earthquakes.forEach((earthquake) => {
+        sizeDepthQualityChart.push({size: earthquake.size, depth: earthquake.depth, quality: earthquake.quality})
+    })
+
     return (
         <div className="visuals">
-            {/* first chart */}
+             {/*first chart */}
             <div>
                 <BarChart
-                    width={550}
-                    height={330}
+                    width={500}
+                    height={400}
                     data={numberOfEarthquakes}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5
-                    }}
                     barSize={20}
                 >
-                    <XAxis dataKey="name" scale="point" padding={{left: 10, right: 10}}/>
-                    <YAxis/>
+                    <XAxis dataKey="name" label={{value: 'magnitude', position: 'insideBottomRight', offset: -5}} scale="point" padding={{left: 10, right: 10}}/>
+                    <YAxis />
                     <Tooltip/>
+                    <Legend />
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Bar dataKey="events" fill="#8884d8" background={{fill: "#eee"}}/>
                 </BarChart>
-                <p>Events sorted by magnitude</p>
-                <p>Total number of events: {earthquakes.length}</p>
-            </div>
 
+            </div>
+            <div>
+                    <ScatterChart
+                        width={500}
+                        height={400}
+                    >
+                        <CartesianGrid />
+                        <XAxis type="number" label={{value: 'quality', position: 'insideBottomRight', offset: -5}} dataKey="quality" name="quality" />
+                        <YAxis type="number" label={{value: 'depth', angle: -90, position: 'insideLeft', offset: 30}} dataKey="depth" name="depth" />
+                        <ZAxis type="number" dataKey="size" name="magnitude" range={[0, 100]} />
+                        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                        <Legend />
+                        <Scatter name="Magnitude" data={sizeDepthQualityChart} fill="#8884d8" shape="triangle" />
+                    </ScatterChart>
+            </div>
         </div>
     );
 }
