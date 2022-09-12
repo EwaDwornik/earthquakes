@@ -24,7 +24,7 @@ export interface Time {
     label: string,
 }
 
-export interface ChartNumberOfEarthquakes {
+export interface NumberOfEarthquakes {
     name: string,
     events: number,
 }

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import '../style/style.css';
-import {SizeDepthQuality, ChartNumberOfEarthquakes} from "../model";
+import {SizeDepthQuality, NumberOfEarthquakes} from "../model";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
 import {
     ScatterChart,
@@ -9,9 +9,6 @@ import {
     Legend,
 } from 'recharts';
 import {Context} from "../context/context";
-
-
-
 
 //all Charts
 export function Charts() {
@@ -41,7 +38,7 @@ export function Charts() {
             dataF++
         }
     })
-    const numberOfEarthquakes: ChartNumberOfEarthquakes[] = [
+    const numberOfEarthquakesChart: NumberOfEarthquakes[] = [
         {
             name: "0-0.5",
             events: dataA,
@@ -77,13 +74,13 @@ export function Charts() {
     })
 
     return (
-        <div className="visuals">
+        <div className="centerContent">
              {/*first chart */}
             <div>
                 <BarChart
                     width={500}
                     height={400}
-                    data={numberOfEarthquakes}
+                    data={numberOfEarthquakesChart}
                     barSize={20}
                 >
                     <XAxis dataKey="name" label={{value: 'magnitude', position: 'insideBottomRight', offset: -5}} scale="point" padding={{left: 10, right: 10}}/>

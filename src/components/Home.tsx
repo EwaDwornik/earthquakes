@@ -44,7 +44,7 @@ export function Earthquakes() {
                 {/* div created to align elements in flexbox */}
                 <div>
                     {/* form to set up range of magnitude */}
-                    <form onSubmit={handleSubmit} className="row content">
+                    <form onSubmit={handleSubmit} className="row centerContent">
                         <div className="col-md-3">
                             <label>min magnitude:</label>
                             <input
@@ -72,7 +72,7 @@ export function Earthquakes() {
                         </div>
                     </form>
                     {/* table with chosen earthquakes */}
-                    <div className="dataTable content">
+                    <div className="dataTable centerContent">
                         <table className="table table-striped text-center">
                             <thead>
                             <tr>
