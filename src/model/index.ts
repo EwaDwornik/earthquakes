@@ -8,15 +8,15 @@ export interface Earthquake {
     humanReadableLocation: string,
 }
 
-export interface GeoMarker {
-    lat: number,
-    lng: number
-}
-
 export interface EarthquakesContextType {
     earthquakes: Earthquake[],
     selectTime: number,
     setSelectTime?: (value: number) => void,
+}
+
+export interface GeoMarker {
+    lat: number,
+    lng: number
 }
 
 export interface Time {

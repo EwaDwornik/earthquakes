@@ -1,20 +1,7 @@
-
+/* overall changes */
 body {
-    margin-top: 100px;
-}
-
-.sidenav {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    padding: 200px 10px 10px 10px;
-}
-
-.wider-grid {
-    margin-left: 350px;
+    margin-top: 130px;
+    font-family: 'Questrial', sans-serif;
 }
 
 .content {
@@ -23,15 +10,45 @@ body {
     margin: 20px;
 }
 
+/* navigation */
+.navbar-custom {
+    font-size: 20px;
+    border-bottom: 1px solid;
+    padding: 10px;
+}
+
+/* main page */
+.sidenav {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px;
+}
+
+.wider-grid {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 .dataTable {
     display: inline-block;
     font-size: 13px;
+    width: 90%
 }
 
 th, td {
     border: 1px solid;
     padding: 5px;
 }
+
+/* page with charts */
 .visuals {
     display: flex;
     flex-wrap: wrap;

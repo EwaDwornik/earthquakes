@@ -4,16 +4,17 @@ import {ChartNumberOfEarthquakes} from "../model";
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
 import {Context} from "../context/context";
 
-
+//all Charts
 export function Charts() {
     const {earthquakes} = useContext(Context)
 
-    let dataA = 0;
-    let dataB = 0;
-    let dataC = 0;
-    let dataD = 0;
-    let dataE = 0;
-    let dataF = 0;
+    //first chart, segregating magnitude value
+    let dataA = 0; //0-0.5
+    let dataB = 0; //0.5-1
+    let dataC = 0; //1-1.5
+    let dataD = 0; //1.5-2
+    let dataE = 0; //2-2.5
+    let dataF = 0; //>2.5
 
     earthquakes.forEach((earthquake) => {
         if (earthquake.size >= 0 && earthquake.size < 0.5) {
@@ -31,6 +32,7 @@ export function Charts() {
         }
     })
 
+    //data in the chart needed format
     const numberOfEarthquakes: ChartNumberOfEarthquakes[] = [
         {
             name: "0-0.5",
@@ -60,8 +62,8 @@ export function Charts() {
 
     return (
         <div className="visuals">
+            {/* first chart */}
             <div>
-
                 <BarChart
                     width={550}
                     height={330}
