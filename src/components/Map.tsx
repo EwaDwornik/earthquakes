@@ -15,7 +15,7 @@ export function Map() {
     })
 
     return (
-        <div className="visuals">
+        <div className="box">
             <LoadScript googleMapsApiKey="">
                 <GoogleMap
                     mapContainerStyle={containerStyleAllMarkers}

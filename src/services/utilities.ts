@@ -50,8 +50,8 @@ export const containerStyleOneMarker = {
 
 //set up size of a map with all markers
 export const containerStyleAllMarkers = {
-    width: '500px',
-    height: '370px'
+    width: '464px',
+    height: '358px'
 };
 
 

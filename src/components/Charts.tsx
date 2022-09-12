@@ -93,7 +93,6 @@ export function Charts() {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Bar dataKey="events" fill="#8884d8" background={{fill: "#eee"}}/>
                 </BarChart>
-
             </div>
             <div>
                     <ScatterChart
