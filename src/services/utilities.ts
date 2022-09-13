@@ -15,7 +15,7 @@ export const timeOptions: Time[] = [
 export const formatDate = (dateString: string) => {
     const options: any = {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
         hour: "numeric",
         minute: "numeric",
@@ -48,3 +48,8 @@ export const containerStyleOneMarker = {
     height: '200px'
 };
 
+//set up size of a map with all markers
+export const containerStyleAllMarkers = {
+    width: '464px',
+    height: '358px'
+};

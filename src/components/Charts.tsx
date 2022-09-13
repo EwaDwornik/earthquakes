@@ -1,13 +1,7 @@
 import React, {useContext} from 'react';
 import '../style/style.css';
 import {SizeDepthQuality, NumberOfEarthquakes} from "../model";
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from "recharts";
-import {
-    ScatterChart,
-    Scatter,
-    ZAxis,
-    Legend,
-} from 'recharts';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ScatterChart, Scatter, ZAxis, Legend} from "recharts";
 import {Context} from "../context/context";
 
 //all Charts
@@ -74,36 +68,41 @@ export function Charts() {
     })
 
     return (
-        <div className="centerContent">
-             {/*first chart */}
-            <div>
+        <div className="row">
+            {/*first chart */}
+            <div className="col">
                 <BarChart
                     width={500}
                     height={400}
                     data={numberOfEarthquakesChart}
                     barSize={20}
                 >
-                    <XAxis dataKey="name" label={{value: 'magnitude', position: 'insideBottomRight', offset: -5}} scale="point" padding={{left: 10, right: 10}}/>
-                    <YAxis />
+                    <XAxis dataKey="name" label={{value: 'magnitude', position: 'insideBottomRight', offset: -5}}
+                           scale="point" padding={{left: 10, right: 10}}/>
+                    <YAxis/>
                     <Tooltip/>
-                    <Legend />
+                    <Legend/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Bar dataKey="events" fill="#8884d8" background={{fill: "#eee"}}/>
                 </BarChart>
             </div>
-            <div>
-                    <ScatterChart
-                        width={500}
-                        height={400}
-                    >
-                        <CartesianGrid />
-                        <XAxis type="number" label={{value: 'quality', position: 'insideBottomRight', offset: -5}} dataKey="quality" name="quality" />
-                        <YAxis type="number" label={{value: 'depth', angle: -90, position: 'insideLeft', offset: 30}} dataKey="depth" name="depth" />
-                        <ZAxis type="number" dataKey="size" name="magnitude" range={[0, 100]} />
-                        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                        <Legend />
-                        <Scatter name="Magnitude" data={sizeDepthQualityChart} fill="#8884d8" shape="triangle" />
-                    </ScatterChart>
+
+            {/*second chart */}
+            <div className="col">
+                <ScatterChart
+                    width={500}
+                    height={400}
+                >
+                    <CartesianGrid/>
+                    <XAxis type="number" label={{value: 'quality', position: 'insideBottomRight', offset: -5}}
+                           dataKey="quality" name="quality"/>
+                    <YAxis type="number" label={{value: 'depth', angle: -90, position: 'insideLeft', offset: 30}}
+                           dataKey="depth" name="depth"/>
+                    <ZAxis type="number" dataKey="size" name="magnitude" range={[0, 100]}/>
+                    <Tooltip cursor={{strokeDasharray: '3 3'}}/>
+                    <Legend/>
+                    <Scatter name="Magnitude" data={sizeDepthQualityChart} fill="#8884d8" shape="triangle"/>
+                </ScatterChart>
             </div>
         </div>
     );

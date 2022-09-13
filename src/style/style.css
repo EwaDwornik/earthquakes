@@ -2,14 +2,8 @@
 /* overall changes */
 body {
     margin-top: 130px;
+    margin-bottom: 50px;
     font-family: 'Questrial', sans-serif;
-}
-
-.centerContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px;
 }
 
 /* navigation */
@@ -19,39 +13,16 @@ body {
     padding: 10px;
 }
 
-/* main page */
-.sidenav {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
+/* table */
+.fixTableHead {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.fixTableHead thead th {
+    position: sticky;
     top: 0;
-    left: 0;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 15px;
-}
-
-.description {
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-.wider-grid {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-}
-
-.dataTable {
-    display: inline-block;
-    font-size: 13px;
-    width: 90%
-}
-
-.shake:active {
-    animation: shake 0.5s;
+    background: white !important;
 }
 
 th, td {
@@ -59,27 +30,8 @@ th, td {
     padding: 5px;
 }
 
-/* visuals */
-
-
-.visualsText {
-    max-width: 800px;
-    margin: 50px;
-}
-
-.titleVerticalLine {
-    height: 100%;
-    position: absolute;
-    border-right: 1px solid;
-    left: 50px;
-    writing-mode: vertical-rl;
-    text-align: center;
-    text-shadow: 2px 2px #8884d8;
-    font-family: 'Poiret One', cursive;
-    font-size: 40px;
-    font-stretch: expanded;
-    letter-spacing: 3px;
-    padding: 20px;
+.shake:active {
+    animation: shake 0.5s;
 }
 
 

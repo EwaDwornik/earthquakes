@@ -24,90 +24,97 @@ export function Earthquakes() {
     })
 
     return (
-        <div className='container'>
-            {/* frozen side, made to always show a map, even when a table is long */}
-            <div className="col-6 col-md-3 sidenav">
-                <div className="description">
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+        <div className="container">
+            <div className=" row g-0 text-center gy-5 gx-5 justify-content-center">
+                <div className="col-6 col-md-4 align-self-center">
+                    <div className="d-flex justify-content-center mb-5">
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <LoadScript googleMapsApiKey="">
+                            <GoogleMap
+                                mapContainerStyle={containerStyleOneMarker}
+                                center={centerMap}
+                                zoom={5}
+                            >
+                                <Marker position={marker}/>
+                            </GoogleMap>
+                        </LoadScript>
+                    </div>
                 </div>
-                <LoadScript googleMapsApiKey="">
-                    <GoogleMap
-                        mapContainerStyle={containerStyleOneMarker}
-                        center={centerMap}
-                        zoom={5}
-                    >
-                        <Marker position={marker}/>
-                    </GoogleMap>
-                </LoadScript>
-            </div>
-            <div className="wider-grid">
-                {/* div created to align elements in flexbox */}
-                <div>
-                    {/* form to set up range of magnitude */}
-                    <form onSubmit={handleSubmit} className="row centerContent">
-                        <div className="col-md-3">
-                            <label>min magnitude:</label>
-                            <input
-                                type='number'
-                                min="0" max="5"
-                                step="0.1"
-                                className="form-control shake"
-                                required
-                                value={range.min}
-                                onChange={e => {
-                                    setRange({...range, min: e.target.valueAsNumber});
-                                }}/>
-                        </div>
-                        <div className="col-md-3">
-                            <label>max magnitude:</label>
-                            <input
-                                type="number"
-                                min="0" max="5"
-                                step="0.1"
-                                className="form-control shake"
-                                value={range.max}
-                                onChange={e => {
-                                    setRange({...range, max: e.target.valueAsNumber});
-                                }}/>
-                        </div>
-                    </form>
-                    {/* table with chosen earthquakes */}
-                    <div className="dataTable centerContent">
-                        <table className="table table-striped text-center">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>latitude</th>
-                                <th>longitude</th>
-                                <th>depth</th>
-                                <th>magnitude</th>
-                                <th>quality</th>
-                                <th>location</th>
-                                <th>show</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {results.map((single, i: number) =>
-                                <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    <td>{formatDate(single.timestamp)}</td>
-                                    <td>{single.latitude}</td>
-                                    <td>{single.longitude}</td>
-                                    <td>{single.depth}</td>
-                                    <td>{single.size}</td>
-                                    <td>{single.quality}</td>
-                                    <td>{single.humanReadableLocation}</td>
-                                    <td>
-                                        <button className="btn shake btn-outline-dark" onClick={e => {
-                                            setMarker({...marker, lat: single.latitude, lng: single.longitude})
-                                        }}>show
-                                        </button>
-                                    </td>
+                <div className="col-sm-6 col-md-8 d-flex justify-content-center">
+                    <div>
+                        {/* form to set up range of magnitude */}
+                        <form onSubmit={handleSubmit} className="d-flex justify-content-center m-3">
+                            <div className="col-md-3 m-3">
+                                <label>min magnitude:</label>
+                                <input
+                                    type='number'
+                                    min="0" max="5"
+                                    step="0.1"
+                                    className="form-control shake"
+                                    required
+                                    value={range.min}
+                                    onChange={e => {
+                                        setRange({...range, min: e.target.valueAsNumber});
+                                    }}/>
+                            </div>
+                            <div className="col-md-3 m-3">
+                                <label>max magnitude:</label>
+                                <input
+                                    type="number"
+                                    min="0" max="5"
+                                    step="0.1"
+                                    className="form-control shake"
+                                    value={range.max}
+                                    onChange={e => {
+                                        setRange({...range, max: e.target.valueAsNumber});
+                                    }}/>
+                            </div>
+                        </form>
+                        {/* table with chosen earthquakes */}
+                        <div className="fixTableHead">
+                            <table className="table table-striped text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>latitude</th>
+                                    <th>longitude</th>
+                                    <th>depth</th>
+                                    <th>magnitude</th>
+                                    <th>quality</th>
+                                    <th>location</th>
+                                    <th>show</th>
                                 </tr>
-                            )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {results.map((single, i: number) =>
+                                    <tr key={i}>
+                                        <td>{i + 1}</td>
+                                        <td>{formatDate(single.timestamp)}</td>
+                                        <td>{single.latitude}</td>
+                                        <td>{single.longitude}</td>
+                                        <td>{single.depth}</td>
+                                        <td>{single.size}</td>
+                                        <td>{single.quality}</td>
+                                        <td>{single.humanReadableLocation}</td>
+                                        <td>
+                                            <button className="btn shake btn-outline-dark" onClick={e => {
+                                                setMarker({...marker, lat: single.latitude, lng: single.longitude})
+                                            }}>show
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
