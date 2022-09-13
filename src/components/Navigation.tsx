@@ -7,6 +7,7 @@ import {timeOptions} from "../services/utilities";
 function Navigation() {
     const {selectTime, setSelectTime} = useContext(Context)
 
+    //setting re-fetching option
     function handleChange(event: any): void {
         setSelectTime?.(event.target.value);
     }
@@ -28,6 +29,7 @@ function Navigation() {
                 <h3>Earthquakes in Iceland </h3>
             </div>
 
+            {/* selecting re-fetching option */}
             <div className="collapse navbar-collapse w-100 order-3 dual-collapse2 " id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
